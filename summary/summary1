@@ -1,1 +1,134 @@
 Command to update the hostfile to github : git push origin master
+
+All right!
+This is a course of pushing code(or somethingelse) to github.
+Now let´s start!
+
+Step 1.Install Git
+Start your terminal and input the command like this:
+
+sudo apt-get install git git-core git-gui git-doc git-svn git-cvs gitweb gitk git-email git-daemon-run git-el git-arch
+
+Then check the SSH
+Input:
+ssh -T git@github.com
+
+If you can see
+
+    Warning: Permanently added ‘github.com,204.232.175.90’ (RSA) to the list of known hosts.
+    Permission denied (publickey).
+
+
+that means you are able to connect to the github now!
+
+Step 2.Install SSH keys
+
+1.Check your system whether there exist ssh keys or not. If existed, go to 2. else go to 3.
+Start your terminal
+COMMAND:
+
+cd ~/.ssh
+ls
+
+if there exist id_rsa and id_rsa.pub("id_rsa" represents for private key while" id_rsa.pub" represents for public key) 
+ Then you shou go to the 2.
+
+2.copy and remove the existed ssh keys
+
+COMMANDS:
+mkdir key_backup
+cp id_rsa* key_backup
+rm id_rsa*
+
+3.Execute the Command as follow
+
+ssh-keygen -t rsa -C "your github email address"
+
+
+4.Add the ssh keys to github
+(1) use gedit/cat to check the id_rsa.pub(public key).
+(2) Go to the https://github.com and go to the "Setting"->"SSH Keys"->"Add SSH Key" and stay.
+(3)copy the content of the file "id_rsa.pub" to the website.
+
+
+5.Double check the situation of SSH
+
+COMMAND:
+
+ssh -T git@github.com
+
+if you see the follow contents, that means you add the ssh key successfully.
+
+Hi "Your github name" ! You’ve successfully authenticated, but GitHub does not provide shell access.
+
+Step 3. Starting using github
+
+1.Config git
+
+git config --global user.name "Your github name"
+git config --global user.email "Your github email"
+
+
+2.Push your code to github in a new Repository
+
+(1)Make a directory
+(2)Go to the directory you just made and initialize it
+COMMAND:
+
+cd ~/Document/Test(The directory I use is "Test")
+git init
+
+(3)Make a change to you directory
+For instant, I add a Readme file here
+COMMAND:
+touch Readme
+
+(4)Update 
+COMMAND:
+git add Readme
+git commit -m 'add readme file'
+
+(5)Push
+In this part, you need to connect you local directory to the Repository
+COMMAND:
+git remote add origin https://github.com/"Your github Name"/"Your github Reposity".git 
+git push origin master
+
+#In the git push origin master, you might need to enter your account and password.
+
+Step 5.How to push local file to the exiting Repository in the github
+(1)clone the Repository from github
+COMMAND:
+git clone https://github.com/"Your github Name"/"Your github Reposity".git
+(2)Make some changes to the Reposity
+COMMAND:
+touch Readme_new
+(3)Update it
+COMMAND:
+git add Readme_new
+git commit -m 'add new readme file'
+(4)Push
+git remote add origin https://github.com/"Your github Name"/"Your github Reposity".git
+git pull origin master
+
+#Sometime after you put in command "git remote add origin https://github.com/"Your github Name"/"Your github Reposity".git". You will get a result "fatal: remote origin already exists". Then you just need to enter the Command "git remote rm origin", which will help you solve this problem.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
